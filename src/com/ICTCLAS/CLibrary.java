@@ -4,33 +4,33 @@ import com.sun.jna.Library;
 import com.sun.jna.Native;
 
 public interface CLibrary extends Library {
-	// ¶¨Òå²¢³õÊ¼»¯½Ó¿ÚµÄ¾²Ì¬±äÁ¿
-	CLibrary Instance = (CLibrary) Native.loadLibrary("F:\\¸öÈËÎÄ¼ş\\×÷Òµ×÷Æ·\\´óËÄÏÂĞÅÏ¢·ÖÎö\\Êı¾İ·ÖÎö\\Êı¾İ\\workSpace\\PudongTextMining\\lib\\NLPIR", CLibrary.class);
+	// å®šä¹‰å¹¶åˆå§‹åŒ–æ¥å£çš„é™æ€å˜é‡
+	CLibrary Instance = (CLibrary) Native.loadLibrary("F:\\ä¸ªäººæ–‡ä»¶\\ä½œä¸šä½œå“\\å¤§å››ä¸‹ä¿¡æ¯åˆ†æ\\æ•°æ®åˆ†æ\\æ•°æ®\\workSpace\\PudongTextMining\\lib\\NLPIR", CLibrary.class);
 	
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	public int NLPIR_Init(String sDataPath, int encoding, String sLicenceCode);
 	
-	//¶Ô×Ö·û´®·Ö´Ê
+	//å¯¹å­—ç¬¦ä¸²åˆ†è¯
 	public String NLPIR_ParagraphProcess(String sSrc, int bPOSTagged);
 
-	//ÌáÈ¡×Ö·û´®¹Ø¼ü´Ê
+	//æå–å­—ç¬¦ä¸²å…³é”®è¯
 	public String NLPIR_GetKeyWords(String sLine, int nMaxKeyLimit, boolean bWeightOut);
 	
-	//ÌáÈ¡TXTÎÄ¼ş¹Ø¼ü´Ê
+	//æå–TXTæ–‡ä»¶å…³é”®è¯
 	public String NLPIR_GetFileKeyWords(String sLine, int nMaxKeyLimit, boolean bWeightOut);
 	
-	//Ìí¼Óµ¥ÌõÓÃ»§´Êµä
+	//æ·»åŠ å•æ¡ç”¨æˆ·è¯å…¸
 	public int NLPIR_AddUserWord(String sWord);
 	
-	//É¾³ıµ¥ÌõÓÃ»§´Êµä
+	//åˆ é™¤å•æ¡ç”¨æˆ·è¯å…¸
 	public int NLPIR_DelUsrWord(String sWord);
 	
-	//µ¼ÈëÓÃ»§´Êµä
+	//å¯¼å…¥ç”¨æˆ·è¯å…¸
 	public int NLPIR_ImportUserDict(String filename, boolean bOverwrite);
 	
-	//±¨´íÈÕÖ¾
+	//æŠ¥é”™æ—¥å¿—
 	public String NLPIR_GetLastErrorMsg();
 	
-	//ÍË³ö
+	//é€€å‡º
 	public void NLPIR_Exit();
 }

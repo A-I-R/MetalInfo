@@ -20,26 +20,26 @@ public class TFIDFFactory {
 	}
 	
 	/**
-	 * ¼ÆËãTF-IDFÈ¨Öµ
-	 * @param sourcePath ´ÊÆµÍ³¼ÆÎÄ¼şÂ·¾¶
-	 * @param targetPath Ä¿±êÂ·¾¶
+	 * è®¡ç®—TF-IDFæƒå€¼
+	 * @param sourcePath è¯é¢‘ç»Ÿè®¡æ–‡ä»¶è·¯å¾„
+	 * @param targetPath ç›®æ ‡è·¯å¾„
 	 */
 	public void getTFIDF(String sourcePath, String targetPath){
 		
-		//±äÁ¿
+		//å˜é‡
 		List<String> headerList=new ArrayList<String>();
 		List<List<Double>> wf=new ArrayList<List<Double>>();
 		List<String> idList=new ArrayList<String>();
 		
-		//¶ÁÈ¡ÎÄ¼ş
+		//è¯»å–æ–‡ä»¶
 		try {
 			FileInputStream fis=new FileInputStream(sourcePath);
 			InputStreamReader isr=new InputStreamReader(fis, "utf-8");
 			BufferedReader br=new BufferedReader(isr);
 			
-			System.out.println("¿ªÊ¼¶ÁÈ¡£¡");
+			System.out.println("å¼€å§‹è¯»å–ï¼");
 			
-			//¶ÁÈ¡±íÍ·
+			//è¯»å–è¡¨å¤´
 			String header=br.readLine();
 			String[] headerParts=header.split(",");
 			for(String part: headerParts){
@@ -47,34 +47,34 @@ public class TFIDFFactory {
 					headerList.add(part);
 				}
 			}
-			System.out.println("±íÍ·¶ÁÈ¡Íê³É£¡");
+			System.out.println("è¡¨å¤´è¯»å–å®Œæˆï¼");
 			
-			//¶ÁÈ¡±íÌå
+			//è¯»å–è¡¨ä½“
 			int count=0;
 			String line=br.readLine();
 			while(line!=null){
 				if(!line.equals("")){
 					String[] parts=line.split(",");
 					List<Double> lineList=new ArrayList<Double>();
-					//·Ö½âÃ¿Ò»ĞĞ
+					//åˆ†è§£æ¯ä¸€è¡Œ
 					for(int i=0; i<parts.length; i++){
 						String part=parts[i];
 						if(i==0){
-							//idÌí¼Óµ½idListÖĞ
+							//idæ·»åŠ åˆ°idListä¸­
 							idList.add(part);
 						}
 						else if(!part.equals("")){
-							//Ìí¼Óµ½Ã¿Ò»ĞĞµÄÁĞ±íÖĞ
+							//æ·»åŠ åˆ°æ¯ä¸€è¡Œçš„åˆ—è¡¨ä¸­
 							lineList.add(Double.parseDouble(part));
 						}
 					}
-					//Ìí¼ÓÖÁÊı¾İ¼¯ÖĞ
+					//æ·»åŠ è‡³æ•°æ®é›†ä¸­
 					wf.add(lineList);
 				}
 				
 				line=br.readLine();
 				count++;
-				System.out.println("µÚ"+count+"ĞĞ¶ÁÈ¡Íê³É£¡");
+				System.out.println("ç¬¬"+count+"è¡Œè¯»å–å®Œæˆï¼");
 				
 			}
 			
@@ -93,14 +93,14 @@ public class TFIDFFactory {
 			System.out.println("IOException");
 		}
 		
-		//È·¶¨ĞĞÁĞÊıÁ¿
-		int colNum=headerList.size();//²»°üÀ¨idÄÇÁĞ
-		int rowNum=wf.size();//²»°üÀ¨±íÍ·
+		//ç¡®å®šè¡Œåˆ—æ•°é‡
+		int colNum=headerList.size();//ä¸åŒ…æ‹¬idé‚£åˆ—
+		int rowNum=wf.size();//ä¸åŒ…æ‹¬è¡¨å¤´
 		
-		//¼ÆËãÄæÎÄµµÆµÂÊ£¬ĞĞÓÅÏÈ±éÀú
-		System.out.println("¼ÆËãÄæÎÄµµÆµÂÊ");
+		//è®¡ç®—é€†æ–‡æ¡£é¢‘ç‡ï¼Œè¡Œä¼˜å…ˆéå†
+		System.out.println("è®¡ç®—é€†æ–‡æ¡£é¢‘ç‡");
 		List<Double> idf=new ArrayList<Double>();
-		//µ¹Ğò¿ªÊ¼£¬µ½0½áÊø¡£¿ÉÒÔÖ±½ÓÉ¾µô³öÏÖ´ÎÊıÎª0µÄ×Ö¶Î
+		//å€’åºå¼€å§‹ï¼Œåˆ°0ç»“æŸã€‚å¯ä»¥ç›´æ¥åˆ æ‰å‡ºç°æ¬¡æ•°ä¸º0çš„å­—æ®µ
 		for(int i=colNum-1; i>=0; i--){
 			int appearedNum=0;
 			for(int j=0; j<rowNum; j++){
@@ -109,7 +109,7 @@ public class TFIDFFactory {
 				}
 			}
 			
-			if(appearedNum==0)//ËµÃ÷Ã»ÓĞÎÄÕÂ³öÏÖ¸Ã¹Ø¼ü´Ê£¬Ö±½ÓÉ¾µô
+			if(appearedNum==0)//è¯´æ˜æ²¡æœ‰æ–‡ç« å‡ºç°è¯¥å…³é”®è¯ï¼Œç›´æ¥åˆ æ‰
 			{
 				headerList.remove(i);
 				for(int j=0; j<rowNum; j++){
@@ -126,38 +126,38 @@ public class TFIDFFactory {
 			}
 			
 		}
-		//½«µ¹ĞòµÄidf±ä³ÉÕıĞò
+		//å°†å€’åºçš„idfå˜æˆæ­£åº
 		Collections.reverse(idf);
 		
-		System.out.println("ÄæÎÄµµÆµÂÊ¼ÆËãÍê³É£¬¹²ÓĞ"+(idf.size())+"¸ö¹Ø¼ü´Ê");
+		System.out.println("é€†æ–‡æ¡£é¢‘ç‡è®¡ç®—å®Œæˆï¼Œå…±æœ‰"+(idf.size())+"ä¸ªå…³é”®è¯");
 		
 		
-		//¼ÆËãtf-idf£¬ÁĞÓÅÏÈ±éÀú
-		System.out.println("¼ÆËãtf-idf");
+		//è®¡ç®—tf-idfï¼Œåˆ—ä¼˜å…ˆéå†
+		System.out.println("è®¡ç®—tf-idf");
 		for(int i=0; i<rowNum; i++){
 			List<Double> lineList=wf.get(i);
 			for(int j=0; j<idf.size(); j++){
 				lineList.set(j, lineList.get(j)*idf.get(j));
 			}
 			wf.set(i, lineList);
-			System.out.println("µÚ"+(i+1)+"ĞĞ¼ÆËãÍê³É");
+			System.out.println("ç¬¬"+(i+1)+"è¡Œè®¡ç®—å®Œæˆ");
 		}
-		System.out.println("tf-idf¼ÆËãÍê³É");
+		System.out.println("tf-idfè®¡ç®—å®Œæˆ");
 		
-		//Ğ´ÈëÎÄ¼ş
-		System.out.println("¿ªÊ¼Ğ´Èë");
+		//å†™å…¥æ–‡ä»¶
+		System.out.println("å¼€å§‹å†™å…¥");
 		try {
 			FileOutputStream fos=new FileOutputStream(targetPath, false);
 			OutputStreamWriter osw=new OutputStreamWriter(fos, "utf-8");
 			BufferedWriter bw=new BufferedWriter(osw);
-			//Êä³ö±íÍ·
+			//è¾“å‡ºè¡¨å¤´
 			String headerString="id,";
 			for(String string: headerList){
 				headerString+=string+",";
 			}
 			bw.write(headerString+"\r\n");
 			
-			//Êä³ö±íÌå
+			//è¾“å‡ºè¡¨ä½“
 			for(int i=0; i<rowNum; i++){
 				String line=idList.get(i)+",";
 				for(int j=0; j<idf.size(); j++){
@@ -183,7 +183,7 @@ public class TFIDFFactory {
 			System.out.println("IOException");
 		}
 		
-		System.out.println("Ğ´ÈëÍê³É£¡");
+		System.out.println("å†™å…¥å®Œæˆï¼");
 		
 	}
 	

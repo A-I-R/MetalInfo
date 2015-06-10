@@ -33,22 +33,22 @@ public class AbstractFactory {
 	}
 	
 	/**
-	 * �ִʺ��ȡ��Ƶ
-	 * @param targetPath Ŀ��·��
-	 * @param userDictPath �û��ʵ�·��
+	 * 分词后获取词频
+	 * @param targetPath 目标路径
+	 * @param userDictPath 用户词典路径
 	 */
 	public void wordFrequency(String targetPath, String userDictPath){
 		
 		int init_flag = CLibrary.Instance.NLPIR_Init("", 1, "0");
 		if (0 == init_flag) {
 			String error = CLibrary.Instance.NLPIR_GetLastErrorMsg();
-			System.err.println("��ʼ��ʧ�ܣ�fail reason is "+error);
+			System.err.println("初始化失败！fail reason is "+error);
 			return;
 		}
 		
 		List<List<String>> userList=new ArrayList<List<String>>();
 		
-		//�û��ʵ䣬ֱ�ӵ�����Ч��һ��������ͬʱ��ӵ�List��呵呵呵
+		//用户词典，直接导入无效，一条条来，同时添加到List中
 		try{
 			File userDict=new File(userDictPath);
 			FileInputStream fisDict=new FileInputStream(userDict);
@@ -59,7 +59,7 @@ public class AbstractFactory {
 			
 			while(line!=null){
 				
-				//���ͬ��ʲ�������ʵ䣬�ʵ��еĴ��ﲻ������ֿո�
+				//拆分同义词并添加至词典，词典中的词语不允许出现空格
 				List<String> similarWords=new ArrayList<String>();
 				String[] words= line.split(",");
 				for(String word: words){
@@ -68,7 +68,7 @@ public class AbstractFactory {
 					}
 					CLibrary.Instance.NLPIR_AddUserWord(word);
 					
-					//�����userList
+					//添加至userList
 					String[] wordParts=word.split(" ");
 					similarWords.add(wordParts[0]);
 				}
@@ -81,7 +81,7 @@ public class AbstractFactory {
 			isrDict.close();
 			fisDict.close();
 			
-			System.out.println("�û��ʵ�װ����ɣ�");
+			System.out.println("用户词典装载完成！");
 			
 		} catch(FileNotFoundException e){
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class AbstractFactory {
 			e.printStackTrace();
 		}
 		
-		//�ִʲ�����ͳ��
+		//分词并进行统计
 		ResultSet rs=null;
 		Map<Integer, String>result=new HashMap<Integer, String>();
 		try {
@@ -109,7 +109,7 @@ public class AbstractFactory {
 				String content=rs.getString("abstract");
 				String splitted=CLibrary.Instance.NLPIR_ParagraphProcess(content, 1);
 				
-				//ͳ�ƴ�Ƶ
+				//统计词频
 				double[] counts=new double[userList.size()];
 				for(int i=0; i<counts.length; i++){
 					counts[i]=0d;
@@ -136,7 +136,7 @@ public class AbstractFactory {
 				}
 				
 				result.put(rs.getInt("id"), resultString);
-				System.out.println("��"+progress+"�д�����ɣ�");
+				System.out.println("第"+progress+"行处理完成！");
 				
 			}
 		} catch (SQLException e) {
@@ -144,10 +144,10 @@ public class AbstractFactory {
 			e.printStackTrace();
 		}
 		
-		System.out.println("�ִ�ͳ����ɣ���"+progress+"��");
-		System.out.println("��ʼд�룡");
+		System.out.println("分词统计完成！共"+progress+"条");
+		System.out.println("开始写入！");
 		
-		//д���ļ�
+		//写入文件
 		File target=new File(targetPath);
 		if(!target.exists()){
 			try {
@@ -163,7 +163,7 @@ public class AbstractFactory {
 			OutputStreamWriter osw=new OutputStreamWriter(fos, "utf-8");
 			BufferedWriter bw=new BufferedWriter(osw);
 			
-			//д��ҳͷ��Ҳ�����û��ʵ�
+			//写入页头，也就是用户词典
 			String header="id,";
 			Iterator<List<String>> headerIt=userList.iterator();
 			while(headerIt.hasNext()){
@@ -183,7 +183,7 @@ public class AbstractFactory {
 			osw.close();
 			fos.close();
 			
-			System.out.println("д����ɣ�");
+			System.out.println("写入完成！");
 			
 		}catch (IOException e){
 			e.printStackTrace();

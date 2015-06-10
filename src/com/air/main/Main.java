@@ -8,14 +8,14 @@ import com.air.function.TFIDFFactory;
 
 public class Main {
 	
-	public static String root="F:\\¸öÈËÎÄ¼ş\\×÷Òµ×÷Æ·\\ÏîÄ¿Ïà¹Ø\\Ò±½ğĞÅÏ¢ÑĞ¾¿Ëù\\Êı¾İ\\´óÊı¾İ»·¾³ÏÂµÄÒ±½ğÎÄÏ×ĞÅÏ¢·ÖÎöÓëÍÚ¾ò_ĞÅÏ¢Ëù·¢_201505191137ÑîºêÕÂ\\";
-	public static String target="F:\\¸öÈËÎÄ¼ş\\×÷Òµ×÷Æ·\\ÏîÄ¿Ïà¹Ø\\Ò±½ğĞÅÏ¢ÑĞ¾¿Ëù\\ÊµÑéÏà¹Ø\\";
+	public static String root="F:\\ä¸ªäººæ–‡ä»¶\\ä½œä¸šä½œå“\\é¡¹ç›®ç›¸å…³\\å†¶é‡‘ä¿¡æ¯ç ”ç©¶æ‰€\\æ•°æ®\\å¤§æ•°æ®ç¯å¢ƒä¸‹çš„å†¶é‡‘æ–‡çŒ®ä¿¡æ¯åˆ†æä¸æŒ–æ˜_ä¿¡æ¯æ‰€å‘_201505191137æ¨å®ç« \\";
+	public static String target="F:\\ä¸ªäººæ–‡ä»¶\\ä½œä¸šä½œå“\\é¡¹ç›®ç›¸å…³\\å†¶é‡‘ä¿¡æ¯ç ”ç©¶æ‰€\\å®éªŒç›¸å…³\\";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println("»¶Ó­£¡");
-		System.out.println("ÇëÊäÈëÖ¸Áî£º¡®kw¡¯£º¹Ø¼ü´Ê´ÊÆµÍ³¼Æ£»¡®ab¡¯£ºÕªÒª·Ö´Ê²¢Í³¼Æ£»¡®ti¡¯£ºÍ³¼Ætf-idf");
+		System.out.println("æ¬¢è¿ï¼");
+		System.out.println("è¯·è¾“å…¥æŒ‡ä»¤ï¼šâ€˜kwâ€™ï¼šå…³é”®è¯è¯é¢‘ç»Ÿè®¡ï¼›â€˜abâ€™ï¼šæ‘˜è¦åˆ†è¯å¹¶ç»Ÿè®¡ï¼›â€˜tiâ€™ï¼šç»Ÿè®¡tf-idf");
 		Scanner scanner=new Scanner(System.in);
 		switch(scanner.nextLine())
 		{
@@ -23,20 +23,20 @@ public class Main {
 		case "kw":
 		{
 			KeywordFactory kf=new KeywordFactory();
-			kf.getKeywordFrequency(target+"¹Ø¼ü´Ê´ÊÆµ.txt");
+			kf.getKeywordFrequency(target+"å…³é”®è¯è¯é¢‘.txt");
 			
 			break;
 		}
 		case "ab":
 		{
 			AbstractFactory af=new AbstractFactory();
-			af.wordFrequency(target+"ÕªÒª´ÊÆµ.txt", target+"userDict.txt");
+			af.wordFrequency(target+"æ‘˜è¦è¯é¢‘.txt", target+"userDict.txt");
 			break;
 		}
 		case "ti":
 		{
 			TFIDFFactory tf=new TFIDFFactory();
-			tf.getTFIDF(target+"ÕªÒª´ÊÆµ.txt", target+"tf-idf.txt");
+			tf.getTFIDF(target+"æ‘˜è¦è¯é¢‘.txt", target+"tf-idf.txt");
 			break;
 		}
 		

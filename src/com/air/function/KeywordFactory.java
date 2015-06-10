@@ -28,14 +28,14 @@ public class KeywordFactory {
 	}
 	
 	/**
-	 * »ñµÃ¹Ø¼ü´Ê´ÊÆµ
-	 * @param targetPath ¹Ø¼ü´Ê´ÊÆµÎÄ¼ş±£´æÂ·¾¶
+	 * è·å¾—å…³é”®è¯è¯é¢‘
+	 * @param targetPath å…³é”®è¯è¯é¢‘æ–‡ä»¶ä¿å­˜è·¯å¾„
 	 */
 	public void getKeywordFrequency(String targetPath){
 		
 		ResultSet rs=null;
 		
-		//¶ÁÈ¡Êı¾İ¿â
+		//è¯»å–æ•°æ®åº“
 		try {
 			Statement stmt=conn.createStatement();
 			rs=stmt.executeQuery("select keyword from chinese");
@@ -45,14 +45,14 @@ public class KeywordFactory {
 			e.printStackTrace();
 		}
 		
-		//È¡³öÊı¾İ²¢·ÖÎö
+		//å–å‡ºæ•°æ®å¹¶åˆ†æ
 		int progress=0;
 		try {
 			while(rs.next()){
 				
 				progress++;
 				
-				//·Ö¸î´ÊÓï
+				//åˆ†å‰²è¯è¯­
 				String keyword=rs.getString("keyword");
 				String[] keywordParts=null;
 				for(String spliter: spliters){
@@ -66,9 +66,9 @@ public class KeywordFactory {
 					keywordParts=new String[]{keyword};
 				}
 				
-				//´¢´æ½á¹û
+				//å‚¨å­˜ç»“æœ
 				for(String word: keywordParts){
-					//ÅĞ¶ÏÓĞĞ§×Ö·û£¬ÇÒ×Ö·û³¤¶ÈÒª´óÓÚ1
+					//åˆ¤æ–­æœ‰æ•ˆå­—ç¬¦ï¼Œä¸”å­—ç¬¦é•¿åº¦è¦å¤§äº1
 					if(word.equals("")||word.equals(",")||word.equals(".")||word.equals(":")||word.length()<=1)
 					{
 						continue;
@@ -83,7 +83,7 @@ public class KeywordFactory {
 					}
 				}
 				
-				System.out.println("µÚ"+progress+"Ìõ´¦ÀíÍê³É£¡");
+				System.out.println("ç¬¬"+progress+"æ¡å¤„ç†å®Œæˆï¼");
 				
 			}
 			
@@ -92,11 +92,11 @@ public class KeywordFactory {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Í³¼ÆÍê³É£¡¹²"+progress+"Ìõ");
-		System.out.println("¿ªÊ¼Ğ´Èë£¡");
+		System.out.println("ç»Ÿè®¡å®Œæˆï¼å…±"+progress+"æ¡");
+		System.out.println("å¼€å§‹å†™å…¥ï¼");
 		
 		
-		//Ğ´ÈëÎÄ¼ş
+		//å†™å…¥æ–‡ä»¶
 		File target=new File(targetPath);
 		if(!target.exists()){
 			try {
@@ -124,7 +124,7 @@ public class KeywordFactory {
 			osw.close();
 			fos.close();
 			
-			System.out.println("Ğ´ÈëÍê³É£¡");
+			System.out.println("å†™å…¥å®Œæˆï¼");
 			
 		}catch (IOException e){
 			e.printStackTrace();

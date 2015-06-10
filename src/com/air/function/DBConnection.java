@@ -22,7 +22,7 @@ public class DBConnection {
 			property.setProperty("password", "abcd@123");
 			property.setProperty("characterEncoding", "utf-8");
 			con=DriverManager.getConnection("jdbc:mysql://localhost/metal", property);
-			System.out.println("数据库连接完成！");
+			System.out.println("鏁版嵁搴撹繛鎺ュ畬鎴愶紒");
 			
 		}  catch (SQLException e){
 			e.printStackTrace();
