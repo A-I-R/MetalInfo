@@ -33,22 +33,22 @@ public class AbstractFactory {
 	}
 	
 	/**
-	 * ·Ö´Êºó»ñÈ¡´ÊÆµ
-	 * @param targetPath Ä¿±êÂ·¾¶
-	 * @param userDictPath ÓÃ»§´ÊµäÂ·¾¶
+	 * ï¿½Ö´Êºï¿½ï¿½È¡ï¿½ï¿½Æµ
+	 * @param targetPath Ä¿ï¿½ï¿½Â·ï¿½ï¿½
+	 * @param userDictPath ï¿½Ã»ï¿½ï¿½Êµï¿½Â·ï¿½ï¿½
 	 */
 	public void wordFrequency(String targetPath, String userDictPath){
 		
 		int init_flag = CLibrary.Instance.NLPIR_Init("", 1, "0");
 		if (0 == init_flag) {
 			String error = CLibrary.Instance.NLPIR_GetLastErrorMsg();
-			System.err.println("³õÊ¼»¯Ê§°Ü£¡fail reason is "+error);
+			System.err.println("ï¿½ï¿½Ê¼ï¿½ï¿½Ê§ï¿½Ü£ï¿½fail reason is "+error);
 			return;
 		}
 		
 		List<List<String>> userList=new ArrayList<List<String>>();
 		
-		//ÓÃ»§´Êµä£¬Ö±½Óµ¼ÈëÎÞÐ§£¬Ò»ÌõÌõÀ´£¬Í¬Ê±Ìí¼Óµ½ListÖÐ
+		//ï¿½Ã»ï¿½ï¿½Êµä£¬Ö±ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬Ê±ï¿½ï¿½Óµï¿½Listï¿½ï¿½å‘µå‘µå‘µ
 		try{
 			File userDict=new File(userDictPath);
 			FileInputStream fisDict=new FileInputStream(userDict);
@@ -59,7 +59,7 @@ public class AbstractFactory {
 			
 			while(line!=null){
 				
-				//²ð·ÖÍ¬Òå´Ê²¢Ìí¼ÓÖÁ´Êµä£¬´ÊµäÖÐµÄ´ÊÓï²»ÔÊÐí³öÏÖ¿Õ¸ñ
+				//ï¿½ï¿½ï¿½Í¬ï¿½ï¿½Ê²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµä£¬ï¿½Êµï¿½ï¿½ÐµÄ´ï¿½ï¿½ï²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¿Õ¸ï¿½
 				List<String> similarWords=new ArrayList<String>();
 				String[] words= line.split(",");
 				for(String word: words){
@@ -68,7 +68,7 @@ public class AbstractFactory {
 					}
 					CLibrary.Instance.NLPIR_AddUserWord(word);
 					
-					//Ìí¼ÓÖÁuserList
+					//ï¿½ï¿½ï¿½ï¿½ï¿½userList
 					String[] wordParts=word.split(" ");
 					similarWords.add(wordParts[0]);
 				}
@@ -81,7 +81,7 @@ public class AbstractFactory {
 			isrDict.close();
 			fisDict.close();
 			
-			System.out.println("ÓÃ»§´Êµä×°ÔØÍê³É£¡");
+			System.out.println("ï¿½Ã»ï¿½ï¿½Êµï¿½×°ï¿½ï¿½ï¿½ï¿½É£ï¿½");
 			
 		} catch(FileNotFoundException e){
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class AbstractFactory {
 			e.printStackTrace();
 		}
 		
-		//·Ö´Ê²¢½øÐÐÍ³¼Æ
+		//ï¿½Ö´Ê²ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½
 		ResultSet rs=null;
 		Map<Integer, String>result=new HashMap<Integer, String>();
 		try {
@@ -109,7 +109,7 @@ public class AbstractFactory {
 				String content=rs.getString("abstract");
 				String splitted=CLibrary.Instance.NLPIR_ParagraphProcess(content, 1);
 				
-				//Í³¼Æ´ÊÆµ
+				//Í³ï¿½Æ´ï¿½Æµ
 				double[] counts=new double[userList.size()];
 				for(int i=0; i<counts.length; i++){
 					counts[i]=0d;
@@ -136,7 +136,7 @@ public class AbstractFactory {
 				}
 				
 				result.put(rs.getInt("id"), resultString);
-				System.out.println("µÚ"+progress+"ÐÐ´¦ÀíÍê³É£¡");
+				System.out.println("ï¿½ï¿½"+progress+"ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½");
 				
 			}
 		} catch (SQLException e) {
@@ -144,10 +144,10 @@ public class AbstractFactory {
 			e.printStackTrace();
 		}
 		
-		System.out.println("·Ö´ÊÍ³¼ÆÍê³É£¡¹²"+progress+"Ìõ");
-		System.out.println("¿ªÊ¼Ð´Èë£¡");
+		System.out.println("ï¿½Ö´ï¿½Í³ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½"+progress+"ï¿½ï¿½");
+		System.out.println("ï¿½ï¿½Ê¼Ð´ï¿½ë£¡");
 		
-		//Ð´ÈëÎÄ¼þ
+		//Ð´ï¿½ï¿½ï¿½Ä¼ï¿½
 		File target=new File(targetPath);
 		if(!target.exists()){
 			try {
@@ -163,7 +163,7 @@ public class AbstractFactory {
 			OutputStreamWriter osw=new OutputStreamWriter(fos, "utf-8");
 			BufferedWriter bw=new BufferedWriter(osw);
 			
-			//Ð´ÈëÒ³Í·£¬Ò²¾ÍÊÇÓÃ»§´Êµä
+			//Ð´ï¿½ï¿½Ò³Í·ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Êµï¿½
 			String header="id,";
 			Iterator<List<String>> headerIt=userList.iterator();
 			while(headerIt.hasNext()){
@@ -183,7 +183,7 @@ public class AbstractFactory {
 			osw.close();
 			fos.close();
 			
-			System.out.println("Ð´ÈëÍê³É£¡");
+			System.out.println("Ð´ï¿½ï¿½ï¿½ï¿½É£ï¿½");
 			
 		}catch (IOException e){
 			e.printStackTrace();
