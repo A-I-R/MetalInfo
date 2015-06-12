@@ -5,7 +5,7 @@ import com.sun.jna.Native;
 
 public interface CLibrary extends Library {
 	// 定义并初始化接口的静态变量
-	CLibrary Instance = (CLibrary) Native.loadLibrary("F:\\个人文件\\作业作品\\大四下信息分析\\数据分析\\数据\\workSpace\\PudongTextMining\\lib\\NLPIR", CLibrary.class);
+	CLibrary Instance = (CLibrary) Native.loadLibrary("F:\\个人文件\\作业作品\\项目相关\\冶金信息研究所\\workSpace\\MetalInfo\\lib\\NLPIR", CLibrary.class);
 	
 	//初始化
 	public int NLPIR_Init(String sDataPath, int encoding, String sLicenceCode);
