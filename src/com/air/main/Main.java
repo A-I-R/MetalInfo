@@ -2,7 +2,7 @@ package com.air.main;
 
 import java.util.Scanner;
 
-import com.air.function.AbstractFactory;
+import com.air.function.WordFrequencyFactory;
 import com.air.function.KeywordFactory;
 import com.air.function.TFIDFFactory;
 
@@ -29,8 +29,8 @@ public class Main {
 		}
 		case "ab":
 		{
-			AbstractFactory af=new AbstractFactory();
-			af.wordFrequency(target+"摘要词频.txt", target+"userDict.txt");
+			WordFrequencyFactory wff=new WordFrequencyFactory();
+			wff.wordFrequency(target+"摘要词频.txt", target+"userDict.txt");
 			break;
 		}
 		case "ti":
