@@ -18,7 +18,8 @@ MetalInfo
 >>>>function----->文本处理功能包<br />
 >>>>>DBConnection.java----->数据库连接<br />
 >>>>>KeywordFactory.java----->统计关键词词频<br />
->>>>>TFIDFFactory.java----->计算TF-IDF权值<br />
+>>>>>SimilarityFactory.java----->文本相似度计算<br />
+>>>>>TFIDFFactory.java----->TF-IDF权值计算<br />
 >>>>>WordFrequencyFactory.java----->对摘要进行分词并统计关键词的词频<br />
 
 >>>>main----->程序入口文件包<br />
@@ -34,7 +35,11 @@ MetalInfo
 
 <br />
 ###改动日志
->2015.06.12<br />
+2015.06.15<br/>
+>
+>* 增加文本相似度计算模块
+
+2015.06.12<br />
 >
 >* 初次上传
 >* 包括关键词处理、摘要分词与词频统计、TF-IDF权值计算功能
