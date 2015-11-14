@@ -24,11 +24,11 @@ import java.util.Map.Entry;
 
 import com.ICTCLAS.CLibrary;
 
-public class WordFrequencyFactory {
+public class AbstractFactory {
 	
 	Connection conn;
 	
-	public WordFrequencyFactory(){
+	public AbstractFactory(){
 		conn=new DBConnection().getConnection();
 	}
 	
