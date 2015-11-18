@@ -408,4 +408,56 @@ public class AnalysisTools {
 		
 	}
 	
+	/**
+	 * 剔除词表中所有的两个字的关键词（英文缩写除外）
+	 * @param sourcePath 源词表地址
+	 * @param targetPath 剔除后新词表的地址
+	 */
+	public void filterSingleWords(String sourcePath, String targetPath){
+		try {
+			//输入与输出文件准备
+			FileInputStream fis=new FileInputStream(sourcePath);
+			InputStreamReader isr=new InputStreamReader(fis, "utf-8");
+			BufferedReader br=new BufferedReader(isr);
+			
+			FileOutputStream fos=new FileOutputStream(targetPath, false);
+			OutputStreamWriter osw=new OutputStreamWriter(fos, "utf-8");
+			BufferedWriter bw=new BufferedWriter(osw);
+			
+			String line=br.readLine();
+			int count=1;
+			
+			while(line!=null){
+				String[] splitted=line.split(" ");
+				if(splitted[0].equals("")||(!splitted[0].matches("^[a-zA-Z0-9]*$")&&splitted[0].length()<=2)){
+					line=br.readLine();//continue之前也需要readLine
+					continue;
+				}
+				
+				bw.write(line+"\r\n");
+				System.out.println("第"+(count++)+"行处理完成！");
+				
+				line=br.readLine();
+			}
+			bw.flush();
+			bw.close();
+			osw.close();
+			fos.close();
+			
+			br.close();
+			isr.close();
+			fis.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

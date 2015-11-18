@@ -14,7 +14,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		System.out.println("欢迎！");
-		System.out.println("请输入指令：‘kw’：关键词词频统计；‘fk’：根据数据库筛选关键词；‘ab’：摘要分词并统计；‘ti’：统计tf-idf；‘sm’：计算词频余弦夹角相似度");
+		System.out.println("请输入指令：‘kw’：关键词词频统计；‘fk’：根据数据库筛选关键词；‘fs’：删除词表中两个字以下的词；‘ab’：摘要分词并统计；‘ti’：统计tf-idf；‘sm’：计算词频余弦夹角相似度");
 		Scanner scanner=new Scanner(System.in);
 		switch(scanner.nextLine())
 		{
@@ -30,6 +30,13 @@ public class Main {
 		{
 			AnalysisTools tool=new AnalysisTools();
 			tool.filterKeywords(target+"userDict.txt", target+"userDictModfied.txt", "chinese_words");
+			
+			break;
+		}
+		case "fs":
+		{
+			AnalysisTools tool=new AnalysisTools();
+			tool.filterSingleWords(target+"userDict.txt", target+"userDictDeleteSingle.txt");
 			
 			break;
 		}
