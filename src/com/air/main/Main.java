@@ -43,13 +43,13 @@ public class Main {
 		case "ab":
 		{
 			AbstractFactory wff=new AbstractFactory();
-			wff.wordFrequency(target+"摘要词频.txt", target+"userDict.txt");
+			wff.wordFrequency(target+"摘要词频deleteSingle.txt", target+"关键词词表deleteSingle.txt");
 			break;
 		}
 		case "ti":
 		{
 			AnalysisTools tool=new AnalysisTools();
-			tool.getTFIDF(target+"摘要词频.txt", target+"tf-idf.txt");
+			tool.getTFIDF(target+"摘要词频deleteSingle.txt", target+"tf-idfDeleteSingle.txt");
 			break;
 		}
 		case "sm":
